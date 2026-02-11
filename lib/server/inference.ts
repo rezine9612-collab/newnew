@@ -1110,9 +1110,9 @@ export function infer(report: any, params?: Partial<InferenceParams>): any {
   }
 
   const interpret = CONTROL_DISTRIBUTION_INTERPRETATION[best] ?? "";
-  const bandNote = CONTROL_BAND_NOTES[band] ?? "";
+  const bandNote2 = CONTROL_BAND_NOTES[band] ?? "";
   const rationale = CONTROL_PATTERN_RATIONALE[best] ?? "";
-  report.ui_text.control.summary_text = [interpret, bandNote, rationale].filter(Boolean).join(" ");
+  report.ui_text.control.summary_text = [interpret, bandNote2, rationale].filter(Boolean).join(" ");
   report.ui_text.control.determination_statement = det.statement;
 
   report.backend.control._debug = report.backend.control._debug ?? {};

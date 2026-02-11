@@ -658,6 +658,7 @@ out.backend.cff.observed_patterns = {
     const mean = radarVals.reduce((a, b) => a + b, 0) / Math.max(1, radarVals.length);
     const var0 = radarVals.reduce((a, b) => a + (b - mean) * (b - mean), 0) / Math.max(1, radarVals.length);
     out.backend.rsl.stability.stability_index = clamp01(1 - Math.min(1, var0 * 4));
+  }
   const st = safeNum(out.backend.rsl.stability.stability_index);
   if (st != null) {
     const sn = lookupStabilityNote(st);
