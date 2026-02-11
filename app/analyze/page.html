@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html class="appPage" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Neuprint, Generate reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_right_alt">
+
+<link href="/styles/globals.css" rel="stylesheet"/>
+</head>
+<body class="appPage">
+<div class="page">
+<main class="main">
+<div class="container">
+<section aria-label="Neuprint main entry" class="hero">
+<div class="brand">
+<img alt="NeuPrint Logo" class="brandLogo enterY" id="brandLogo" src="/assets/neuprint_logo.svg"/>
+<div class="brandline enterY" id="brandline">
+<span>NeuPrint Cognitive Forensics Engine v1.1</span>
+</div>
+</div>
+<h1 id="heroTitle">
+<span class="typeLine" id="titleLine1"></span><br/>
+<span class="typeLine" id="titleLine2"></span>
+</h1>
+<p class="subtitle enterY" id="heroSubtitle"></p>
+<div class="intakeWrap">
+<div class="intakeBox enterY" id="intakeBox">
+<textarea aria-label="Text intake" class="intakeText" id="intakeText" placeholder="Paste text to establish a cognitive reference."></textarea>
+<div aria-label="Input tools (placeholders)" class="intakeTools">
+<button aria-label="Attach file (placeholder)" class="iconBtn" title="Attach file (placeholder)" type="button">
+<span aria-hidden="true" class="material-symbols--attach-file-rounded"></span>
+</button>
+<button aria-label="Voice record (placeholder)" class="iconBtn" title="Voice record (placeholder)" type="button">
+<span aria-hidden="true" class="material-symbols--mic"></span>
+</button>
+<button aria-label="Image search (placeholder)" class="iconBtn" title="Image search (placeholder)" type="button">
+<span aria-hidden="true" class="material-symbols--center-focus-weak-outline"></span>
+</button>
+</div>
+</div>
+<div aria-label="Sample quick inserts" class="sampleRow enterY" id="sampleRow">
+<button class="sampleBtn" data-sample="sample1 입니다." type="button">Sample 1</button>
+<button class="sampleBtn" data-sample="sample2 입니다." type="button">Sample 2</button>
+<button class="sampleBtn" data-sample="sample3 입니다." type="button">Sample 3</button>
+<button class="sampleBtn" data-sample="sample4 입니다." type="button">Sample 4</button>
+<button class="sampleBtn" data-sample="sample5 입니다." type="button">Sample 5</button>
+</div>
+<button aria-label="Generate reference" class="cta enterY" id="ctaBtn" type="button">
+              Generate reference
+              <span aria-hidden="true" class="material-symbols-outlined ctaArrow">arrow_right_alt</span>
+</button>
+<footer aria-label="Footer" class="footer enterY" id="footer" role="contentinfo">
+              Copyright © 2026 Neuprint. All rights reserved. U.S. entity in formation.
+            </footer>
+</div>
+</section>
+</div>
+</main>
+</div>
+
+<script src="/lib/client/intake.js"></script>
+</body>
+</html>

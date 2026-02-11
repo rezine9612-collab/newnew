@@ -1,0 +1,1286 @@
+/* Combined styles for app page.html and report page.html (scoped by body class) */
+
+body.appPage .material-symbols-outlined{
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+    }html.appPage{
+      --containerMax: 1120px;
+
+      --bg:#ffffff;
+      --text:#0b1220;
+      --muted:#667085;
+
+      --inputBorder:#E6EBF2;
+      --ring:#444A59;
+
+      --radiusLG: 14px;
+      --font: "Barlow", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Logo sizing */
+      --logoW: 220px;
+      --logoW-m: 190px;
+    }body.appPage *{ box-sizing:border-box; }body.appPage html, body.appPage{ height:100%; }body.appPage{
+      margin:0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+    }body.appPage .page{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }body.appPage .container{
+      width:100%;
+      max-width: var(--containerMax);
+      margin:0 auto;
+      padding: 0 20px;
+    }body.appPage .main{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 44px 0 84px;
+    }body.appPage .hero{
+      width: 100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap: 14px;
+    }body.appPage .brand{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      margin-bottom: 10px;
+    }body.appPage .brandLogo{
+      width: var(--logoW);
+      height: auto;
+      display:block;
+      margin-left:-6px;
+    }body.appPage .brandline{
+      display:inline-flex;
+      align-items:center;
+      margin-top:10px;
+      gap:8px;
+      font-size:13px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }body.appPage h1{
+      margin: 18px 0 0;
+      font-size: 42px;
+      line-height: 1.16;
+      letter-spacing: -0.6px;
+      font-weight: 600;
+      max-width: 860px;
+
+      /* (2) 단어 중간 줄바꿈 방지 */
+      word-break: keep-all;
+      overflow-wrap: normal;
+      hyphens: none;
+    }body.appPage .subtitle{
+      margin: 6px 0 0;
+      font-size: 18px;
+      line-height: 1.55;
+      font-weight: 400;
+      max-width: 760px;
+
+      /* (2) 단어 중간 줄바꿈 방지 */
+      word-break: keep-all;
+      overflow-wrap: normal;
+      hyphens: none;
+    }
+    body.appPage #heroSubtitle{ white-space: nowrap; }
+    @media (max-width: 900px){
+      body.appPage #heroSubtitle{ white-space: normal; }
+    }
+body.appPage /* Intake block */
+    .intakeWrap{
+      margin-top: 22px;
+      width: 100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 12px;
+    }body.appPage .intakeBox{
+      width: 770px;
+      height: 150px;
+      border: 1px solid var(--inputBorder);
+      border-radius: var(--radiusLG);
+      background:#fff;
+      display:flex;
+      flex-direction:column;
+      padding: 14px 16px 12px;
+
+      /* 바깥 링을 위한 여유 */
+      box-shadow: 0 0 0 0 rgba(0,0,0,0);
+      transition: box-shadow .14s ease, border-color .14s ease;
+    }body.appPage /* 포커스시 "바깥" 링 */
+    .intakeBox:focus-within{
+      border-color: transparent;
+      box-shadow: 0 0 0 2px var(--ring);
+    }body.appPage /* 내용이 있으면 포커스 없어도 링 유지 */
+    .intakeBox.isFilled{
+      border-color: transparent;
+      box-shadow: 0 0 0 2px var(--ring);
+    }body.appPage .intakeText{
+      width:100%;
+      flex: 1;
+      border:0;
+      outline:0;
+      resize:none;
+      font: 14px/1.55 var(--font);
+      color: var(--text);
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      overflow: auto;
+    }body.appPage .intakeText::placeholder{
+      color:#000000;
+      transition: opacity .12s ease;
+    }body.appPage /* Placeholder hides on focus */
+    .intakeText:focus::placeholder{
+      opacity: 0;
+    }body.appPage .intakeTools{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin-top: 10px;
+      justify-content:flex-start;
+    }body.appPage .iconBtn{
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      border: 0;
+      background: transparent;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:#111827;
+      opacity: .50;
+      cursor: default;
+      padding:0;
+    }body.appPage .iconBtn:hover{ opacity: 1; }body.appPage /* Provided icon styles */
+    .material-symbols--attach-file-rounded{
+      display:inline-block;
+      width:24px;
+      height:24px;
+      --svg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M18 15.75q0 2.6-1.825 4.425T11.75 22t-4.425-1.825T5.5 15.75V6.5q0-1.875 1.313-3.187T10 2t3.188 1.313T14.5 6.5v8.75q0 1.15-.8 1.95t-1.95.8t-1.95-.8t-.8-1.95V7q0-.425.288-.712T10 6t.713.288T11 7v8.25q0 .325.213.538t.537.212t.538-.213t.212-.537V6.5q-.025-1.05-.737-1.775T10 4t-1.775.725T7.5 6.5v9.25q-.025 1.775 1.225 3.013T11.75 20q1.75 0 2.975-1.237T16 15.75V7q0-.425.288-.712T17 6t.713.288T18 7z'/%3E%3C/svg%3E");
+      background-color: currentColor;
+      -webkit-mask-image: var(--svg);
+      mask-image: var(--svg);
+      -webkit-mask-repeat:no-repeat;
+      mask-repeat:no-repeat;
+      -webkit-mask-size:100% 100%;
+      mask-size:100% 100%;
+    }body.appPage .material-symbols--center-focus-weak-outline{
+      display:inline-block;
+      width:24px;
+      height:24px;
+      --svg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 16q-1.65 0-2.825-1.175T8 12t1.175-2.825T12 8t2.825 1.175T16 12t-1.175 2.825T12 16m0-2q.825 0 1.413-.587T14 12t-.587-1.412T12 10t-1.412.588T10 12t.588 1.413T12 14m-7 7q-.825 0-1.412-.587T3 19v-4h2v4h4v2zm10 0v-2h4v-4h2v4q0 .825-.587 1.413T19 21zM3 9V5q0-.825.588-1.412T5 3h4v2H5v4zm16 0V5h-4V3h4q.825 0 1.413.588T21 5v4z'/%3E%3C/svg%3E");
+      background-color: currentColor;
+      -webkit-mask-image: var(--svg);
+      mask-image: var(--svg);
+      -webkit-mask-repeat:no-repeat;
+      mask-repeat:no-repeat;
+      -webkit-mask-size:100% 100%;
+      mask-size:100% 100%;
+    }body.appPage .material-symbols--mic{
+      display:inline-block;
+      width:24px;
+      height:24px;
+      --svg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 14q-1.25 0-2.125-.875T9 11V5q0-1.25.875-2.125T12 2t2.125.875T15 5v6q0 1.25-.875 2.125T12 14m-1 7v-3.075q-2.6-.35-4.3-2.325T5 11h2q0 2.075 1.463 3.538T12 16t3.538-1.463T17 11h2q0 2.625-1.7 4.6T13 17.925V21z'/%3E%3C/svg%3E");
+      background-color: currentColor;
+      -webkit-mask-image: var(--svg);
+      mask-image: var(--svg);
+      -webkit-mask-repeat:no-repeat;
+      mask-repeat:no-repeat;
+      -webkit-mask-size:100% 100%;
+      mask-size:100% 100%;
+    }body.appPage /* Sample buttons */
+    .sampleRow{
+      width: 770px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 4px;
+    }body.appPage .sampleBtn{
+      appearance:none;
+      box-sizing: border-box;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0);
+
+      background:#fff;
+      font: 14px/1 var(--font);
+      font-weight: 400;
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+
+      transition: border-color .14s ease, box-shadow .14s ease, transform .14s ease;
+      user-select:none;
+    }body.appPage .sampleBtn:hover, body.appPage .sampleBtn:focus-visible{
+      border-color: var(--ring);
+      box-shadow: 0 0 0 1px var(--ring);
+      outline:none;
+    }body.appPage .sampleBtn:active, body.appPage .sampleBtn.isActive{
+      border-color: var(--ring);
+      box-shadow: 0 0 0 1px var(--ring);
+    }body.appPage /* CTA */
+    .cta{
+      margin-top:50px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+
+      padding:12px 18px;
+      min-width:210px;
+
+      box-sizing:border-box;
+      border-radius:12px;
+
+      border:1px solid #E2E8F0;
+      outline:4px solid rgba(255,255,255,0);
+      outline-offset:0;
+
+      background:#fff;
+      color:#0b1220;
+
+      font-weight:600;
+      font-size:15px;
+      letter-spacing:.1px;
+
+      cursor:pointer;
+      user-select:none;
+
+      transition: border-color .14s ease, outline-color .14s ease;
+    }body.appPage .ctaArrow{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      transform:translateX(0);
+      transition:transform .50s ease;
+    }body.appPage .cta:hover .ctaArrow{
+      transform:translateX(6px);
+    }body.appPage .cta.isHot{
+      border-color:transparent;
+      outline-color: var(--ring);
+    }body.appPage .cta.isHot .ctaArrow{
+      transform:translateX(6px);
+    }body.appPage /* Footer: 버튼 아래 60px */
+    .footer{
+      margin-top: 60px;
+      padding: 0 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+      text-align: center;
+    }@media (max-width: 860px){body.appPage .brandLogo{ width: var(--logoW-m); }body.appPage h1{ font-size: 32px; }body.appPage .intakeBox{ width: 100%; }body.appPage .sampleRow{ width: 100%; }body.appPage .intakeWrap{ width: 100%; }body.appPage .subtitle{ font-size: 16px; }}body.appPage /* =========================================================
+       (1) Entrance motion (layout fixed: opacity/transform only)
+       - 요소는 처음부터 자리(레이아웃)를 차지한 채로 투명/이동 상태만 바뀜
+    ========================================================= */
+    .enterY{
+      opacity:0;
+      transform: translateY(-10px);
+      will-change: opacity, transform;
+    }body.appPage .enterY.isIn{
+      opacity:1;
+      transform: translateY(0);
+      transition: opacity var(--enterDur, 260ms) ease, transform var(--enterDur, 260ms) ease;
+    }body.appPage /* =========================================================
+       Title/SubTitle typewriter (spaces preserved)
+       - span 하나씩 등장하지만 opacity만 변화, body.appPage 레이아웃 변동 없음
+    ========================================================= */
+    .typeLine{
+      display:inline;
+      white-space: pre; /* 공백 폭 유지 */
+    }body.appPage .twChar{
+      display:inline-block;
+      opacity:0;
+      will-change: opacity;
+    }body.appPage .twChar.isOn{
+      opacity:1;
+      transition: opacity var(--twFadeDur, 80ms) linear;
+    }
+
+html.reportPage{
+        
+        --containerMax: 1120px;
+        --sidePad: 27px;
+
+        --radius: 16px;
+
+        
+        --logoW: 220px;
+        --logoW-m: 190px;
+
+        
+        --bg: #ffffff;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #0f172a;
+        --border: #e2e8f0;
+        --soft: #f8fafc;
+
+        
+        --accentA: #074d81;
+        --accentB: #40b1e6;
+        --accentC: #20cbc2;
+        --accentD: #fabb05;
+        --accentE: #f97b17;
+
+        
+        --pillA: rgba(7, 77, 129, 0.18);
+        --pillB: rgba(64, 177, 230, 0.18);
+        --pillC: rgba(32, 203, 194, 0.18);
+        --pillD: rgba(250, 187, 5, 0.2);
+        --pillE: rgba(249, 123, 23, 0.18);
+        --pillN: rgba(245, 245, 245, 0.96);
+        --pillNeutral: rgba(238, 238, 238, 0.93);
+
+        
+        --chipTopGap: 26px;
+        --headerBottomGap: 10px;
+
+        
+        --sectionTopGap-1: 0px;
+        --sectionTopGap-2: -100px;
+
+        
+        --chartH: 240px;
+        --chartH-m: 220px;
+
+        --donutH: 300px;
+        --donutH-m: 240px;
+
+        --radarH: 300px;
+        --radarH-m: 340px;
+
+        --sig: 264px;
+        --sig-m: 288px;
+
+        
+        --gaugeH: 180px;
+        --gaugeH-m: 165px;
+
+        
+        --chartAnimDuration: 2100ms;
+        --chartAnimDelay: 270ms;
+        --sigAnimMs: 4200;
+      }body.reportPage /* =========================================================
+   Base / Reset
+========================================================= */
+
+      *{
+        box-sizing: border-box;
+      }body.reportPage html, body.reportPage{
+        height: 100%;
+      }html.reportPage{
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }body.reportPage{
+        margin: 0;
+        font-family:
+          'Barlow',
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        color: var(--text);
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: var(--bg);
+        min-height: 100svh;
+        overflow-y: scroll;
+      }body.reportPage .container{
+        max-width: var(--containerMax);
+        margin: 0 auto;
+        padding: 18px calc(var(--sidePad) + env(safe-area-inset-left)) 56px
+          calc(var(--sidePad) + env(safe-area-inset-right));
+      }body.reportPage /* =========================================================
+   Layout / Header
+========================================================= */
+
+      
+      .topbar{
+        display: block;
+        padding: 10px 0 14px;
+        background: #fff;
+      }body.reportPage .headerTopRow{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+      }body.reportPage .headerLeft{
+        flex: 1 1 auto;
+        min-width: 0;
+        margin-top: -12px;
+      }body.reportPage .headerRight{
+        flex: 0 0 auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-top: 14px;
+      }body.reportPage .headerBelowRow{
+        margin-top: 10px;
+        padding-bottom: var(--headerBottomGap);
+      }body.reportPage .headerBrand{
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding-top: 0;
+        padding-bottom: 0;
+      }body.reportPage .brandLogo{
+        width: var(--logoW);
+        height: auto;
+        display: block;
+        margin-left: -10px;
+        margin-top: 19px;
+      }body.reportPage .brandline{
+        display: inline-flex;
+        align-items: center;
+        margin-top: 10px;
+        gap: 8px;
+        font-size: 15px;
+        color: var(--muted);
+        flex-wrap: wrap;
+      }body.reportPage .title{
+        margin: 22px 0 4px;
+        font-size: 42px;
+        font-weight: 600;
+        line-height: 1.15;
+      }body.reportPage .subtitle{
+        margin: 8px 0 35px 0;
+        font-size: 18px;
+        color: var(--muted);
+        line-height: 1.35;
+      }body.reportPage .metaRow{
+        margin-top: var(--chipTopGap);
+        display: flex;
+        flex-wrap: nowrap; 
+        gap: 10px; 
+        align-items: stretch;
+        width: 100%;
+      }body.reportPage .chip{
+        flex: 1 1 0; 
+        min-width: max-content; 
+        width: auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+
+        
+        box-sizing: border-box;
+        padding: 6px 6px 6px 14px; 
+        background: #f5f5f5;
+        border-radius: 12px; 
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.2; 
+      }body.reportPage .chipLabel{
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+      }body.reportPage .chip .pill{
+        margin-left: auto;
+        flex: 0 0 auto;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+      }body.reportPage .pill{
+        
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 8px 10px; 
+        border-radius: 8px; 
+        font-size: 13px;
+        font-weight: 600;
+        background: #ffffff;
+        color: var(--text);
+        white-space: nowrap;
+        line-height: 1;
+      }body.reportPage .pill.toneB{
+        background: #fff;
+        color: var(--accentB);
+      }body.reportPage .pill.toneC{
+        background: #fff;
+        color: var(--accentC);
+      }body.reportPage .pill.toneD{
+        background: #fff;
+        color: var(--accentD);
+      }body.reportPage .pill.toneE{
+        background: #fff;
+        color: var(--accentE);
+      }body.reportPage .pill.toneN{
+        background: #fff;
+        color: var(--text);
+      }body.reportPage .rightMeta{
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+      }body.reportPage .qrBox{
+        padding: 10px;
+        background: #fff;
+        width: 116px;
+        flex: 0 0 auto;
+        margin-top: -16px;
+        transform: translateY(-4px);
+      }body.reportPage .qrBox img{
+        display: block;
+        width: 94px;
+        height: 94px;
+        margin: 0 auto;
+      }body.reportPage .verifyText{
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.35;
+        margin-top: -5px;
+        max-width: 420px;
+        text-align: right;
+      }body.reportPage .verifyText span{
+        font-weight: 500;
+        color: var(--text);
+      }body.reportPage .tab.active{
+        border: 0px solid rgba(15, 23, 42, 0.4);
+        outline: 4px solid rgba(15, 23, 42, 0.78);
+        outline-offset: 0;
+        font-weight: 500;
+      }body.reportPage .grid{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+        margin-top: 16px;
+        scroll-margin-top: 92px;
+      }body.reportPage .card{
+        grid-column: span 12;
+        background: var(--panel);
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+      }body.reportPage .sectionBlock{
+        padding: 14px 0;
+      }body.reportPage .cardHeader{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }body.reportPage .cardTitle{
+        font-weight: 600;
+        font-size: 24px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }body.reportPage .muted{
+        color: var(--muted);
+      }body.reportPage .small{
+        font-size: 15px;
+        font-weight: 600;
+      }body.reportPage .tiny{
+        font-size: 13px;
+        line-height: 1.4;
+      }body.reportPage .code{
+        font-family:
+          'Barlow',
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }body.reportPage #tab-authorship{
+        margin-top: var(--sectionTopGap-2);
+      }body.reportPage .metrics{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 10px;
+      }body.reportPage .metricBox{
+        border: 1px solid rgba(226, 232, 240, 0.85);
+        border-radius: 8px;
+        background: #fff;
+        padding: 12px;
+        min-height: 92px;
+      }body.reportPage .metricLabel{
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 500;
+      }body.reportPage .metricValue{
+        margin-top: 6px;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--text);
+      }body.reportPage .metricNote{
+        margin-top: 6px;
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.35;
+        font-weight: 400;
+      }body.reportPage #mRslLevel{
+        color: var(--accentE);
+      }body.reportPage #mRslMean{
+        color: var(--accentC);
+      }body.reportPage #mRslCohort{
+        color: var(--accentB);
+      }body.reportPage #mRslStability{
+        color: var(--accentD);
+      }body.reportPage .twoCol{
+        display: grid;
+        align-items: stretch;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px; 
+        margin-top: 12px;
+      }body.reportPage .twoCol > *{
+        height: 100%;
+      }body.reportPage #tab-rsl #rslResultsByDimension tr:last-child td{
+        border-bottom: 0 !important;
+      }body.reportPage #tab-rsl #rslResultsByDimension tr:last-child{
+        border-bottom: 0 !important;
+      }body.reportPage #tab-rsl .arcTableFrame{
+        border-bottom: 0 !important;
+      }body.reportPage .panel{
+        border: 1px solid rgba(226, 232, 240, 0.85);
+        border-radius: 8px;
+        padding: 12px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+      }body.reportPage .kpiRow{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-top: 10px;
+      }body.reportPage .kpi{
+        background: #f5f5f5;
+        padding: 8px 10px;
+        border-radius: 8px;
+        font-size: 13px;
+        color: var(--text);
+        line-height: 1;
+        font-weight: 400;
+      }body.reportPage .kpiLabel{
+        font-weight: 600; 
+      }body.reportPage .kpiLabel .code{
+        font-weight: 400; 
+      }body.reportPage .chartBox{
+        border: 1px solid rgba(226, 232, 240, 0.85);
+        border-radius: 8px;
+        background: #fff;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow: hidden;
+        height: 100%;
+      }body.reportPage .chartCanvasWrap canvas{
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+      }body.reportPage .chartBox.distBar .chartCanvasWrap{
+        height: 140px;
+      }body.reportPage .chartTitleText{
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.25;
+      }body.reportPage .chartCanvasWrap{
+        position: relative;
+        width: 100%;
+        height: var(--chartH);
+        min-height: var(--chartH);
+        max-height: var(--chartH);
+        flex: 0 0 auto;
+      }body.reportPage .chartBox.radarBox .chartCanvasWrap{
+        height: var(--radarH);
+        min-height: var(--radarH);
+        max-height: var(--radarH);
+      }body.reportPage canvas{
+        width: 100% !important;
+        height: 100% !important;
+      }body.reportPage .signatureBox .chartCanvasWrap{
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        max-width: var(--sig);
+        margin: 0 auto;
+        position: relative;
+        height: var(--sig);
+        min-height: var(--sig);
+        max-height: var(--sig);
+        flex: 0 0 auto;
+      }body.reportPage .signatureBox #signatureCanvas{
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+      }body.reportPage table{
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }body.reportPage th, body.reportPage td{
+        padding: 9px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }body.reportPage th{
+        text-align: left;
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 600;
+        background: #fff;
+      }body.reportPage tr:last-child td{
+        border-bottom: 0;
+      }body.reportPage .footer{
+        margin-top: 22px;
+        padding: 14px 0 0;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-weight: 400;
+      }body.reportPage .decisionCompression{
+        margin-top: 14px;
+        margin-bottom: -20px;
+        padding: 14px 18px;
+        background: #ffffff;
+        border-radius: 12px;
+        border: 5px solid #f5f5f5;
+        font-style: italic;
+        font-size: clamp(15px, 4.2vw, 18px);
+        font-weight: 500;
+      }body.reportPage .decisionCompressionLine{
+        line-height: 1.4;
+      }body.reportPage /* =========================================================
+   Components / Role Fit Inference Flow (HTML)
+   - SVG removed
+   - Compact pill-card rows for high readability on mobile
+========================================================= */
+
+#tab-hr .rfFlow{
+  --rfGap: 9px;
+  margin-top:10px;
+  margin-bottom:3px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background: transparent;
+  position:relative;
+}body.reportPage /* left rail line */
+#tab-hr .rfFlow::before{
+  display:none;
+
+  content:"";
+  position:absolute;
+  left: 25px;
+  top: 8px;
+  bottom: 8px;
+  width:1px;
+  background: rgba(148,163,184,.42);
+  border-radius:999px;
+}body.reportPage #tab-hr .rfRow{
+  position:relative;
+  display:block;
+  padding: 12px 12px 12px 39px; /* shrink box ~5px while keeping axis room */
+  border:1px solid rgba(226,232,240,.95);
+  border-radius:12px;
+  background:#fff;
+}body.reportPage #tab-hr .rfRow + .rfRow{ margin-top: var(--rfGap); }body.reportPage #tab-hr .rfMark{
+  position:absolute;
+  left: 25px;          /* aligns with the existing rail */
+  top: 0;
+  bottom: 0;
+  width: 0;
+  pointer-events:none;
+}body.reportPage /* colored connector + arrowhead, body.reportPage centered to the CARD (rfRow) */
+
+/* arrow head is placed exactly at the end of the line (no gap) */
+
+/* text */
+#tab-hr .rfText{ min-width:0; }body.reportPage #tab-hr .rfTitle{
+  font-size:15px;
+  margin-top:4px;
+  margin-left:6px;
+  font-weight:500;
+  line-height:1.25;
+  color: rgba(15,23,42,.92);
+}body.reportPage #tab-hr .rfTags{
+  margin-top:3px;
+  margin-left:6px;
+  font-size:13px;
+  font-weight:400;
+  line-height:1.25;
+  word-break: keep-all;
+}body.reportPage #tab-hr #rfClosing{
+  margin-top:12px !important;
+  margin-bottom:3px;
+}body.reportPage /* step color accents (used for arrow color) */
+#tab-hr .rfRow.r1{ --rfArrow: rgba(64,177,230,.95); }body.reportPage #tab-hr .rfRow.r2{ --rfArrow: rgba(7,77,129,.92); }body.reportPage #tab-hr .rfRow.r3{ --rfArrow: rgba(32,203,194,.95); }body.reportPage #tab-hr .rfRow.r4{ --rfArrow: rgba(250,187,5,.95); }body.reportPage #tab-hr .rfRow.r5{ --rfArrow: rgba(249,123,23,.95); }body.reportPage #tab-hr .rfRow.r6{ --rfArrow: rgba(148,163,184,.95); }body.reportPage /* sequential reveal (top -> bottom) */
+#tab-hr .rfFlow.is-animated .rfRow{
+  opacity:0;
+  transform: translateY(-30px);
+  /* animation starts when .rf-start is added by JS */
+  will-change: opacity, transform;
+}body.reportPage #tab-hr .rfFlow.is-animated.rf-start .rfRow{
+  animation: rfFadeInUp 1040ms cubic-bezier(.2,.8,.2,1) forwards;
+  will-change: opacity, transform;
+}@keyframes rfFadeInUp{
+  from{ opacity:0; transform: translateY(-30px); }
+  to{ opacity:1; transform: translateY(0); }
+}@media (prefers-reduced-motion: reduce){body.reportPage #tab-hr .rfFlow.is-animated .rfRow{
+    opacity:1 !important;
+    transform:none !important;
+    animation:none !important;
+  }}body.reportPage /* =========================================================
+   Components / Alignment Strip
+========================================================= */
+
+      /* =========================================================
+   International Alignment Strip (Footer Above) - PNG Logos
+========================================================= */
+      .alignmentStrip{
+        margin-top: 22px;
+        padding: 30px 24px 30px; 
+        background: #f8f8f8;
+        width: 100%;
+        border-radius: 14px;
+        text-align: center;
+      }body.reportPage .alignmentInner{
+        max-width: var(--containerMax, 1180px);
+        margin: 0 auto;
+      }body.reportPage .alignmentLogos{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 5px 18px; 
+        margin-bottom: 20px;
+      }body.reportPage .alLogo{
+        height: 40px;
+        min-width: 0;
+        padding: 6px 10px;
+        border-radius: 12px;
+        background: transparent; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }body.reportPage .alImg{
+        height: 24px;
+        width: auto;
+        max-width: 150px;
+        object-fit: contain;
+        filter: grayscale(100%);
+        opacity: 0.6;
+        display: block;
+      }body.reportPage .alFallback{
+        display: none;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.5);
+        white-space: nowrap;
+      }body.reportPage .alignmentNote{
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.6;
+        color: var(--text);
+        margin: 2px auto 0;
+        max-width: 980px;
+      }body.reportPage .alignmentNote .em{
+        font-weight: 600;
+        color: var(--text-strong, var(--text));
+      }body.reportPage /* =========================================================
+   Utilities
+========================================================= */
+
+      
+      .uNoteTight{
+        margin-top: -6px;
+        margin-bottom: 14px;
+        font-size: 14px;
+        line-height: 1.55;
+      }body.reportPage .uNoteTight2{
+        margin-top: -6px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        line-height: 1.55;
+      }body.reportPage .uMt0{
+        margin-top: 0px;
+      }body.reportPage .uMt6Lh{
+        margin-top: 6px;
+        line-height: 1.55;
+      }body.reportPage .uMt8Lh{
+        margin-top: 8px;
+        line-height: 1.55;
+      }body.reportPage .uMt10{
+        margin-top: 10px;
+      }body.reportPage .uMt12{
+        margin-top: 12px;
+      }body.reportPage .uMt14{
+        margin-top: 14px;
+      }body.reportPage .uMb8{
+        margin-bottom: 8px;
+      }body.reportPage .uW110{
+        width: 110px;
+      }body.reportPage .uW220{
+        width: 220px;
+      }body.reportPage .uTopRule{
+        margin-top: 10px;
+        line-height: 1.55;
+        padding-top: 10px;
+        border-top: 1px solid rgba(226, 232, 240, 0.85);
+      }body.reportPage .uLh155{
+        line-height: 1.55;
+      }body.reportPage .uMt6{
+        margin-top: 6px;
+      }body.reportPage .uMt11{
+        margin-top: 11px;
+      }body.reportPage .uMt10Lh{
+        margin-top: 10px;
+        line-height: 1.55;
+      }body.reportPage .uMt12Lh{
+        margin-top: 12px;
+        line-height: 1.55;
+      }body.reportPage .uListTight{
+        margin: 8px 0 0 -24px;
+        line-height: 1.6;
+      }body.reportPage .uListTight2{
+        margin: 10px 0 0 -24px;
+        line-height: 1.6;
+      }body.reportPage .uH140{
+        height: 140px;
+      }body.reportPage .uW120{
+        width: 120px;
+      }body.reportPage .uW140{
+        width: 140px;
+      }body.reportPage .uW160{
+        width: 160px;
+      }body.reportPage .roleFitGrid{
+        align-items: stretch;
+        gap: 12px;
+        grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+      }body.reportPage .roleFitLeftCol{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-width: 0;
+      }body.reportPage .roleFitRightCol{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-width: 340px;
+        max-width: 520px;
+      }body.reportPage /* ===== Cleanups (v1) ===== */
+      .tableFrame{
+        margin-top: 10px;
+        overflow: auto;
+        border-top: 1px solid rgba(226, 232, 240, 0.85);
+        border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+      }body.reportPage .rslOneLine{
+        margin-top: 10px;
+        margin-bottom: 12px;
+        font-size: 20px;
+        font-weight: 500;
+        font-style: italic;
+        letter-spacing: -0.02em;
+        color: rgba(15, 23, 42, 0.9);
+      }body.reportPage .chartCohortWrap{
+        margin-top: 30px;
+        height: 271px;
+        min-height: 104px;
+        max-height: 271px;
+      }body.reportPage .centerTiny{
+        margin-top: 8px;
+        margin-bottom: 11px;
+        font-size: 15px;
+        text-align: center;
+      }body.reportPage /* =========================================================
+   PATCH OVERRIDES (consolidated) - v16
+   Keeps latest fixes in one place.
+========================================================= */
+
+      /* =========================================================
+   Mobile cleanup (legacy TOC spacing removal)
+   - Keeps desktop rendering identical
+   - Fixes mobile section header being pushed/clipped by legacy negative offsets
+========================================================= */
+
+      /* =========================================================
+   Mobile spacing corrections (v17)
+   1) Add air between Identity chip row and Decision Compression (+10px)
+   2) Remove excess gap between Decision Compression and Section 1 title
+========================================================= */
+
+      /* =========================================================
+   ORDER 3-2-1-4: spacing fixes (v2)
+   - Reduce the first section top gap
+   - Prevent bottom clipping between CFF -> Reasoning Control
+   - Avoid excessive blank space after last section
+========================================================= */
+      #tab-rsl.grid{
+        margin-top: 8px;
+      }body.reportPage #tab-cff .card{
+        overflow: visible;
+      }body.reportPage #tab-cff{
+        padding-bottom: 6px;
+      }body.reportPage #tab-authorship{
+        margin-top: 14px;
+      }body.reportPage #tab-hr{
+        margin-bottom: 10px;
+      }body.reportPage /* =========================================================
+   RSL top spacing tighten (v4)
+========================================================= */
+      #tab-rsl{
+        margin-top: 0;
+      }body.reportPage #tab-rsl .sectionBlock{
+        padding-top: 0;
+      }body.reportPage #tab-rsl .cardHeader{
+        margin-top: 8px;
+      }body.reportPage /* =========================================================
+   HARD FIX: first section top gap
+   .grid has margin-top:16px globally.
+   Force the FIRST grid section (RSL) to zero.
+========================================================= */
+      main > section.grid:first-of-type, body.reportPage .container > section.grid:first-of-type, body.reportPage section.grid#tab-rsl{
+        margin-top: 0;
+        scroll-margin-top: 0;
+      }body.reportPage /* =========================================================
+   HARD FIX v6: remove header-to-first-section gap
+   Cause: .container has padding-top:18px
+   Apply only to the FIRST container right after </header>
+========================================================= */
+      header + .container{
+        padding-top: 0;
+      }body.reportPage /* =========================================================
+   HARD FIX v7: shrink header bottom padding
+   Cause: .topbar has padding-bottom:14px
+========================================================= */
+      #topbar.topbar{
+        padding-bottom: 0;
+      }body.reportPage /* =========================================================
+   Responsive
+========================================================= */
+
+/* =========================================================
+   Responsive & Accessibility
+   Consolidated @media blocks (safe merge)
+========================================================= */
+@media (max-width: 980px){
+.metaRow {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          justify-content: flex-start;
+        }
+        .metrics {
+          grid-template-columns: repeat(1, 1fr);
+        }
+        .twoCol {
+          grid-template-columns: 1fr;
+        }
+        .rightMeta {
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: flex-end;
+        }
+        .verifyText {
+          max-width: 340px;
+        }
+
+#tab-hr .twoCol {
+          grid-template-columns: 1fr !important;
+        }
+        #tab-hr .twoCol > * {
+          min-width: 0 !important;
+          max-width: none !important;
+        }
+        #tab-hr .panel {
+          min-width: 0 !important;
+          max-width: none !important;
+        }
+}@media (max-width: 680px){body.reportPage{
+          overflow-x: hidden;
+        }body.reportPage .container{
+          padding: 12px calc(24px + env(safe-area-inset-left)) 44px
+            calc(24px + env(safe-area-inset-right));
+        }body.reportPage .headerTopRow{
+          flex-direction: column;
+          gap: 12px;
+        }body.reportPage .headerRight{
+          width: 100%;
+          justify-content: space-between;
+          align-items: flex-start;
+        }body.reportPage .qrBox{
+          width: 108px;
+        }body.reportPage .qrBox img{
+          width: 84px;
+          height: 84px;
+        }body.reportPage .verifyText{
+          text-align: left;
+          max-width: none;
+        }body.reportPage .brandLogo{
+          width: var(--logoW-m);
+        }body.reportPage .brandline{
+		  font-size: 11px;
+		}body.reportPage .title{
+          font-size: 28px;
+        }body.reportPage .subtitle{
+          font-size: 14px;
+          margin-top: 18px;
+        }body.reportPage .cardTitle{
+          font-size: 20px;
+        }body.reportPage .chartCanvasWrap{
+          height: var(--chartH-m);
+          min-height: var(--chartH-m);
+          max-height: var(--chartH-m);
+        }body.reportPage .chartBox.radarBox .chartCanvasWrap{
+          height: var(--radarH-m);
+          min-height: var(--radarH-m);
+          max-height: var(--radarH-m);
+        }body.reportPage .signatureBox .chartCanvasWrap{
+          max-width: var(--sig-m);
+          height: var(--sig-m);
+          min-height: var(--sig-m);
+          max-height: var(--sig-m);
+        }body.reportPage .metaRow{
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }body.reportPage #qrBlock{
+          display: none !important;
+        }body.reportPage #tab-cff .panel table thead th:nth-child(4), body.reportPage #tab-cff .panel table tbody td:nth-child(4){
+          display: none !important;
+        }body.reportPage #tab-cff .panel table{
+          table-layout: fixed;
+        }body.reportPage #tab-cff .panel table thead th:nth-child(1){
+          width: 72px !important;
+        }body.reportPage #tab-cff .panel table tbody td:nth-child(1){
+          width: 72px !important;
+        }body.reportPage #tab-cff .panel table thead th:nth-child(2){
+          width: 72px !important;
+          text-align: left !important;
+          padding-right: 8px !important;
+          white-space: nowrap !important;
+        }body.reportPage #tab-cff .panel table tbody td:nth-child(2){
+          width: 72px !important;
+          text-align: left !important;
+          padding-right: 8px !important;
+          white-space: nowrap !important;
+        }body.reportPage #tab-cff .panel table thead th:nth-child(3), body.reportPage #tab-cff .panel table tbody td:nth-child(3){
+          width: auto !important;
+          padding-left: 10px !important;
+          padding-right: 8px !important;
+        }body.reportPage .npFlowTitle{
+          font-size: 22px !important;
+        }body.reportPage .npFlowTags{
+          font-size: 18px !important;
+        }body.reportPage #tab-rsl .arcTableFrame table thead th:nth-child(2), body.reportPage #tab-rsl .arcTableFrame table tbody td:nth-child(2){
+          text-align: right !important;
+          padding-right: 12px;
+        }body.reportPage #tab-rsl .arcTableFrame table tbody tr td{
+          border-bottom: 1px solid var(--border) !important;
+        }body.reportPage #tab-rsl .arcTableFrame table tbody tr:last-child td{
+          border-bottom: 0 !important;
+        }body.reportPage #tab-rsl .arcTableFrame table thead{
+          display: none !important;
+        }body.reportPage #tab-rsl .arcTableFrame table tbody td:last-child{
+          display: none !important;
+        }body.reportPage #tab-rsl .arcTableFrame{
+          border-top: 0 !important;
+          border-bottom: 0 !important;
+        }body.reportPage #tab-rsl .arcTableFrame table{
+          border-collapse: separate;
+          border-spacing: 0 10px;
+        }body.reportPage #tab-rsl .arcTableFrame table tbody tr td{
+          padding: 10px 10px !important;
+          background: transparent;
+        }body.reportPage #tab-rsl .arcTableFrame table tbody tr td{
+          border-bottom: 0 !important;
+        }body.reportPage .alignmentStrip{
+          margin-top: 18px;
+          padding: 16px 14px 16px;
+        }body.reportPage .alignmentLogos{
+          gap: 12px 18px;
+          margin-bottom: 12px;
+        }body.reportPage .alLogo{
+          height: 38px;
+          padding: 6px 8px;
+          border-radius: 10px;
+        }body.reportPage .alImg{
+          height: 22px;
+          max-width: 140px;
+        }body.reportPage .alignmentNote{
+          font-size: 13px;
+          padding: 0 10px;
+        }body.reportPage /* =========================================================
+           Mobile: Reasoning by Dimension (RSL table) header line
+           - Bold dimension + Score
+           - Ensure 'Score 4' spacing and right alignment
+           - Add small air before observation text
+        ========================================================= */
+        #tab-rsl .arcHeadLine{
+          display:flex;
+          align-items:baseline;
+          justify-content:space-between;
+          gap:10px;
+          margin-bottom: 6px;
+        }body.reportPage #tab-rsl .arcDimLabel{
+          font-weight:600;
+        }body.reportPage #tab-rsl .arcScoreWrap{
+          margin-left:auto;
+          text-align:right;
+          white-space:nowrap;
+          font-weight:600;
+        }body.reportPage #tab-rsl .arcScoreWord, body.reportPage #tab-rsl .arcScoreDot{
+          font-weight:600;
+        }body.reportPage #tab-rsl .arcObsMobile{
+          margin-top:0;
+        }}body.reportPage /* =========================================================
+   Control pattern multiline spacing fix
+   - Improves readability when value wraps to 2 lines on mobile
+========================================================= */
+#aiPatternLabel{
+  line-height: 1.4;
+  display: inline-block;
+}body.reportPage /* numbered step markers (no lines, body.reportPage no arrows) */
+#tab-hr .rfMark{
+  position:absolute;
+  left:25px;
+  top:50%;
+  transform: translate(-50%, -50%);
+  width:22px;
+  height:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}body.reportPage #tab-hr .rfStep{
+  font-size:16px;
+  font-weight:700;
+  line-height:1;
+  color: var(--rfArrow, rgba(32,203,194,.95));
+}body.reportPage /* assign numbers */
+#tab-hr .rfRow.r1 .rfStep::before{ content:"①"; }body.reportPage #tab-hr .rfRow.r2 .rfStep::before{ content:"②"; }body.reportPage #tab-hr .rfRow.r3 .rfStep::before{ content:"③"; }body.reportPage #tab-hr .rfRow.r4 .rfStep::before{ content:"④"; }body.reportPage #tab-hr .rfRow.r5 .rfStep::before{ content:"⑤"; }body.reportPage #tab-hr .rfRow.r6 .rfStep::before{ content:"⑥"; }body.reportPage /* Mobile: Reasoning by Dimension header tweak (v18) */
+@media (max-width: 680px){
+  #tab-rsl .arcHeadLine{ margin-bottom:6px !important; }
+  #tab-rsl .arcDimLabel{ font-size:14px !important; font-weight:600; }
+  #tab-rsl .arcScoreWrap{ font-size:14px !important; font-weight:600; }
+
+#tab-hr .rfTitle{ font-size:14px; }
+}body.reportPage /* === CFF Indicator Summary: remove Status column (v1.1) === */
+#tab-cff table thead th:nth-child(4), body.reportPage #tab-cff table tbody td:nth-child(4){
+  display: none !important;
+}

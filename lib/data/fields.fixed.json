@@ -1,0 +1,19 @@
+{
+  "fields": {
+    "backend.control.reliability_score.method": {
+      "sample": "sigmoid"
+    },
+    "backend.control.reliability_score.params.alpha": {
+      "sample": 6.0
+    },
+    "backend.control.reliability_score.params.beta": {
+      "sample": 0.0
+    },
+    "backend.control.reliability_score.params.mu": {
+      "sample": 0.5
+    },
+    "backend.control.reliability_score.params.tau": {
+      "sample": 0.15
+    }
+  }
+}

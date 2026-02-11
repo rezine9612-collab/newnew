@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+<html class="reportPage" lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<title>NeuPrint Integrated Cognitive &amp; Authorship Verification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="/styles/globals.css" rel="stylesheet"/>
+</head>
+<body class="reportPage">
+<header class="topbar" id="topbar">
+<div class="container">
+<div class="headerTopRow">
+<div class="headerLeft">
+<div class="headerBrand">
+<img alt="NeuPrint Logo" class="brandLogo" src="/assets/neuprint_logo.svg"/>
+</div>
+<div class="brandline">
+<span> NeuPrint Cognitive Forensics Engine v1.1 </span>
+</div>
+</div>
+<div class="headerRight rightMeta" id="qrBlock">
+<div class="verifyText" id="verifyText">
+              This determination is structurally signed and referenceable.
+              <br/>
+<span id="verifyUrlText"></span>
+<br/>
+<br/>
+              QR code shown represents the verification anchor.
+              <br/>
+              Verification ID :
+              <span id="verifyIdText"></span>
+</div>
+<div class="qrBox" title="QR image">
+<img alt="QR placeholder" id="qrImg" src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg"/>
+</div>
+</div>
+</div>
+<div class="headerBelowRow">
+<h1 class="title" id="heroTitle"></h1>
+<p class="subtitle" id="heroDesc"></p>
+<div class="metaRow">
+<span class="chip">
+<span class="chipLabel"> RSL Level </span>
+<span class="pill toneB" id="rslPill"></span>
+</span>
+<span class="chip" title="Final determination label">
+<span class="chipLabel"> Determination </span>
+<span class="pill toneE" id="finalDetPill"></span>
+</span>
+<span class="chip" title="Reasoning Index (uses the same 0–5 axis shown in the placement map)">
+<span class="chipLabel"> FRI </span>
+<span class="pill toneC" id="reasoningIndexPill"></span>
+</span>
+<span class="chip" title="Structural agency share">
+<span class="chipLabel"> Control </span>
+<span class="pill toneN" id="controlPill"></span>
+</span>
+<span class="chip" title="Top recommended role track">
+<span class="chipLabel"> Role Fit </span>
+<span class="pill toneD" id="jobFitPill"></span>
+</span>
+</div>
+<div class="decisionCompression">
+<div class="decisionCompressionLine"><span id="heroDecisionQuote"></span></div>
+</div>
+</div>
+</div>
+</header>
+<div class="container">
+<section class="grid" id="tab-rsl">
+<div class="card">
+<div class="sectionBlock">
+<div class="cardHeader">
+<div class="cardTitle">1. Reasoning Structure Layer (RSL)</div>
+</div>
+<div class="tiny muted uNoteTight2">
+              This section shows how your thinking was organized in this writing, and what you can improve next.
+            </div>
+<div class="tiny muted uNoteTight"></div>
+<div class="metrics uMb8">
+<div class="metricBox">
+<div class="metricLabel">RSL Level</div>
+<div class="metricValue" id="mRslLevel"></div>
+<div class="metricNote" id="mRslLevelNote"></div>
+</div>
+<div class="metricBox">
+<div class="metricLabel">Final Reasoning Index</div>
+<div class="metricValue" id="mRslMean"></div>
+<div class="metricNote" id="mRslMeanNote"></div>
+</div>
+<div class="metricBox">
+<div class="metricLabel">Cohort Placement</div>
+<div class="metricValue" id="mRslCohort"></div>
+<div class="metricNote" id="mRslCohortNote"></div>
+</div>
+<div class="metricBox">
+<div class="metricLabel">Stability Index</div>
+<div class="metricValue" id="mRslStability"></div>
+<div class="metricNote" id="mRslStabilityNote"></div>
+</div>
+</div>
+<!-- C) Summary -->
+<div class="uMt14">
+<div class="panel">
+<div class="small">RSL Summary</div>
+<div class="rslOneLine" id="rsl_one_line_summary">
+<span id="rslOneLine"></span>
+</div>
+<div class="tiny muted uMt0" id="rslSummaryText"></div>
+</div>
+</div>
+<!-- D) Charts -->
+<div class="twoCol uMt14">
+<!-- (LEFT) Cohort Positioning (replaces RSL Dimension Bars) -->
+<div class="chartBox">
+<div class="chartTitleText">Cohort Positioning</div>
+<div class="chartCanvasWrap chartCohortWrap">
+<canvas id="chartRslBars"> </canvas>
+</div>
+<div class="tiny muted uMt10">
+                  Horizontal axis shows FRI (0 to 5). Vertical axis shows the share of the cohort (0
+                  to 100%) at each score band. The yellow marker shows the current position, and the
+                  outer ring indicates the positioning moment.
+                </div>
+</div>
+<div class="chartBox radarBox">
+<div class="chartTitleText">RSL Radar</div>
+<div class="chartCanvasWrap">
+<canvas id="chartRslRadar"> </canvas>
+</div>
+<div class="tiny muted uMt10">
+                  This chart shows balance. A rounder shape means your skills work together. Sharp
+                  dips mean one or two skills need attention.
+                </div>
+</div>
+</div>
+<div class="panel uMt14">
+<div class="small">Reasoning by Dimension</div>
+<div class="arcTableFrame tableFrame">
+<table>
+<thead>
+<tr>
+<th class="uW220">Reasoning Dimension</th>
+<th class="uW110">Score</th>
+<th>Structural Observation</th>
+</tr>
+</thead>
+<tbody id="rslResultsByDimension">
+</tbody>
+</table>
+<div class="tiny muted uTopRule">
+                  RSL (R1–R8) is aligned with internationally validated reasoning constructs used
+                  across OECD/PISA assessments, ETS evidence-centered evaluation frameworks,
+                  APA-endorsed critical thinking models, and UNESCO-referenced global competence and
+                  citizenship frameworks.
+                </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="grid" id="tab-cff">
+<div class="card">
+<div class="sectionBlock">
+<div class="cardHeader">
+<div class="cardTitle">2. Cognitive Fingerprint Framework (CFF)</div>
+</div>
+<div class="tiny muted uNoteTight2">
+              Describes structural characteristics of reasoning formation and revision behavior
+              observed in the task, based on the CFF indicator set.
+            </div>
+<div class="twoCol">
+<!-- LEFT : Observed Reasoning Patterns -->
+<div class="panel">
+<div class="small">Observed Reasoning Patterns</div>
+<!-- Result line -->
+<div class="tiny muted uMt8Lh">
+                  Primary pattern is <span class="kpiLabel" id="cffPrimary"></span> and secondary
+                  pattern is <span class="kpiLabel" id="cffSecondary"></span>.
+                </div>
+<!-- Middle: grey card -->
+<div class="kpiRow uMt12">
+<span class="kpi"><span class="kpiLabel" id="cffPrimary2"></span></span>
+<span class="kpi"><span class="kpiLabel" id="cffSecondary2"></span></span>
+</div>
+<!-- Bottom: explanation (meaning) -->
+<div class="tiny muted uMt8Lh" id="cffPatternMeaning"></div>
+</div>
+<!-- RIGHT : Final Determination -->
+<div class="panel">
+<div class="small">Final Determination</div>
+<!-- Friendly intro -->
+<div class="tiny muted uMt6Lh">Based on the observed reasoning patterns and structural control signals, the reasoning is classified as :</div>
+<!-- Middle: grey card -->
+<div class="kpiRow uMt12">
+<span class="kpi"><span class="kpiLabel" id="cffFinalLabel2"></span></span>
+<span class="kpi"><span class="kpiLabel">Type Confidence : </span><span class="code" id="cffFinalConf2"></span></span>
+</div>
+<!-- Bottom: explanation (meaning) -->
+<div class="tiny muted uMt8Lh" id="cffFinalMeaning"></div>
+</div>
+</div>
+<div class="twoCol">
+<!-- Signature -->
+<div class="chartBox signatureBox" id="signatureBox">
+<div class="chartTitleText">Cognitive Fingerprint</div>
+<div class="chartCanvasWrap" id="signatureWrap">
+<canvas aria-label="Cognitive fingerprint canvas" id="signatureCanvas"> </canvas>
+</div>
+<div class="tiny muted centerTiny">
+<span class="kpiLabel"> Reasoning Structure Visualization </span>
+</div>
+<div class="tiny muted uLh155" id="signatureNote"></div>
+</div>
+<!-- Radar -->
+<div class="chartBox radarBox">
+<div class="chartTitleText">CFF Radar</div>
+<div class="chartCanvasWrap">
+<canvas id="chartCffRadar"> </canvas>
+</div>
+<div class="tiny muted uMt10">
+                  The CFF Radar shows the relative distribution of structural reasoning indicators.
+                  The shape reflects contribution patterns rather than performance or optimality.
+                </div>
+</div>
+</div>
+<div class="panel uMt14">
+<div class="small">CFF Indicator Summary</div>
+<div class="tableFrame">
+<table>
+<thead>
+<tr>
+<th class="uW120">Code</th>
+<th class="uW140">Score</th>
+<th>Indicator</th>
+<th class="uW160">Status</th>
+</tr>
+</thead>
+<tbody id="cffTableBody"></tbody>
+</table>
+</div>
+<div class="tiny muted uMt10Lh">
+                The Cognitive Fingerprint Framework describes how reasoning is structurally formed,
+                revised, and controlled, providing a stable reference for understanding thinking
+                patterns beyond surface content or outcomes.
+              </div>
+</div>
+</div>
+</div>
+</section>
+<section class="grid" id="tab-authorship">
+<div class="card">
+<div class="sectionBlock">
+<div class="cardHeader">
+<div class="cardTitle">3. Reasoning Control (Structural Agency)</div>
+</div>
+<div class="tiny muted uNoteTight2">
+              Evaluates individual control over reasoning decisions versus automated continuation,
+              as defined by structural agency at decision boundaries in NeuPrint.
+            </div>
+<!-- 상단 패널 -->
+<div class="twoCol">
+<!-- LEFT -->
+<div class="panel">
+<div class="small">Reasoning Control Summary</div>
+<div class="tiny muted uMt6" id="aiInterpretation"></div>
+<div class="kpiRow uMt10">
+<span class="kpi">
+<span class="kpiLabel"> Control pattern : </span>
+<span class="code" id="aiPatternLabel"></span>
+</span>
+<span class="kpi">
+<span class="kpiLabel"> Reliability band : </span>
+<span class="code" id="aiReliability"></span>
+</span>
+</div>
+<div class="tiny muted uMt10Lh">
+                  Reasoning decisions originate from human-driven structural revision rather than
+                  automated continuation flow.
+                </div>
+</div>
+<div class="panel">
+<div class="small">Observed Structural Signals</div>
+<ul class="tiny muted uListTight" id="agencySignalsList">
+</ul>
+<div class="tiny muted uMt10Lh" id="agencySignalsNote">
+                  These signals reflect document-specific structural behavior and are independent of
+                  surface-level writing style.
+                </div>
+</div>
+</div>
+<div class="twoCol uMt12">
+<div class="chartBox distBar">
+<div class="chartTitleText">Reasoning Control Distribution</div>
+<div class="chartCanvasWrap uH140">
+<canvas id="chartMixAgency"> </canvas>
+</div>
+<div class="tiny muted uMt10Lh">
+                  The distribution shows the proportion of ownership of reasoning decisions across
+                  structural decision points. Values reflect where control was exercised during
+                  reasoning transitions, not authorship attribution, model usage, or stylistic
+                  origin. A high human proportion indicates that primary reasoning control remained
+                  with the individual throughout the task.
+                </div>
+<div class="kpiRow uMt6" id="mixKpis"></div>
+</div>
+<div class="chartBox">
+<div class="chartTitleText">
+                  Structural Control Signals
+                  <span class="tiny muted"> (Agency Indicators) </span>
+</div>
+<div class="chartCanvasWrap">
+<canvas id="chartAuthSignals"> </canvas>
+</div>
+<div class="tiny muted uMt10Lh">
+                  Signal values represent relative contribution to the overall reasoning control
+                  determination, normalized on a 0 to 1 scale.
+                </div>
+<ul class="tiny muted uListTight2">
+<li>
+<span class="kpiLabel"> Structural variance </span>
+                    : non-linear restructuring across reasoning boundaries.
+                  </li>
+<li>
+<span class="kpiLabel"> Human rhythm index </span>
+                    : irregular pacing consistent with reflective decision cycles.
+                  </li>
+<li>
+<span class="kpiLabel"> Transition flow </span>
+                    : intentional movement between reasoning states.
+                  </li>
+<li>
+<span class="kpiLabel"> Revision depth </span>
+                    : degree of conceptual modification at semantic boundaries.
+                  </li>
+</ul>
+<div class="tiny muted uMt10Lh">
+                  The combined signal profile supports classification as human-controlled reasoning.
+                </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="grid" id="tab-hr">
+<div class="card">
+<div class="sectionBlock">
+<div class="cardHeader">
+<div class="cardTitle">4. Role Fit Signals</div>
+</div>
+<div class="tiny muted uNoteTight2">
+              Explores alignment between observed reasoning patterns and role-specific cognitive
+              demands.
+            </div>
+<div class="twoCol roleFitGrid">
+<div class="roleFitLeftCol">
+<div class="panel">
+<div class="small">Cognitive Style Summary</div>
+<div class="tiny muted uMt6" id="hrProfile1"></div>
+<div class="kpiRow uMt10" id="hrKpis"></div>
+<div class="tiny muted uMt11" id="hrProfile2"></div>
+</div>
+<div class="chartBox">
+<div class="chartTitleText">Job Role Fit</div>
+<div class="chartCanvasWrap">
+<canvas id="chartHrFit"> </canvas>
+</div>
+<div class="tiny muted uMt6" id="hrProfile3"></div>
+</div>
+</div>
+<div class="panel roleFitRightCol">
+<div class="small">Role Fit Inference Flow</div>
+<div aria-label="Role Fit Inference Flow" class="rfFlow is-animated">
+<div class="rfRow r1" data-step="1">
+<div aria-hidden="true" class="rfMark"><span class="rfStep"></span></div>
+<div class="rfText">
+<div class="rfTitle">Cognitive Operating Characteristics</div>
+<div class="rfTags">thought control · reasoning mode</div>
+</div>
+</div>
+<div class="rfRow r2" data-step="2">
+<div aria-hidden="true" class="rfMark"><span class="rfStep"></span></div>
+<div class="rfText">
+<div class="rfTitle">Reasoning Structure Patterns</div>
+<div class="rfTags">decomposition · linkage · validation · regulation</div>
+</div>
+</div>
+<div class="rfRow r3" data-step="3">
+<div aria-hidden="true" class="rfMark"><span class="rfStep"></span></div>
+<div class="rfText">
+<div class="rfTitle">NeuPrint Primary Metrics</div>
+<div class="rfTags">CFF 8 · RSL R1–R8</div>
+</div>
+</div>
+<div class="rfRow r4" data-step="4">
+<div aria-hidden="true" class="rfMark"><span class="rfStep"></span></div>
+<div class="rfText">
+<div class="rfTitle">NeuPrint Secondary Interpretations</div>
+<div class="rfTags">Reasoning Level · Stability · Drift</div>
+</div>
+</div>
+<div class="rfRow r5" data-step="5">
+<div aria-hidden="true" class="rfMark"><span class="rfStep"></span></div>
+<div class="rfText">
+<div class="rfTitle">Competency Fulfillment Assessment</div>
+<div class="rfTags">OECD aligned · O*NET aligned · reference</div>
+</div>
+</div>
+<div class="rfRow r6" data-step="6">
+<div aria-hidden="true" class="rfMark"><span class="rfStep"></span></div>
+<div class="rfText">
+<div class="rfTitle">Job Role Fit</div>
+<div class="rfTags">final alignment signal · decision support</div>
+</div>
+</div>
+</div>
+<div class="tiny muted uMt10" id="rfClosing"></div>
+</div>
+</div>
+</div>
+</div></section>
+<div aria-label="International framework alignment" class="alignmentStrip">
+<div class="alignmentInner">
+<div aria-label="Aligned institutions and frameworks" class="alignmentLogos">
+<div class="alLogo">
+<img alt="OECD" class="alImg" src="/assets/OECD_logo.png"/>
+<span class="alFallback"> OECD </span>
+</div>
+<div class="alLogo">
+<img alt="PISA" class="alImg" src="/assets/PISA_logo.png"/>
+<span class="alFallback"> PISA </span>
+</div>
+<div class="alLogo">
+<img alt="ETS" class="alImg" src="/assets/ETS_logo.png"/>
+<span class="alFallback"> ETS </span>
+</div>
+<div class="alLogo">
+<img alt="APA" class="alImg" src="/assets/APA_logo.png"/>
+<span class="alFallback"> APA </span>
+</div>
+<div class="alLogo">
+<img alt="O*NET" class="alImg" src="/assets/Onet_logo.png"/>
+<span class="alFallback"> O*NET </span>
+</div>
+<div class="alLogo">
+<img alt="AERA" class="alImg" src="/assets/AERA_logo.png"/>
+<span class="alFallback"> AERA </span>
+</div>
+<div class="alLogo">
+<img alt="NCME" class="alImg" src="/assets/NCME_logo.png"/>
+<span class="alFallback"> NCME </span>
+</div>
+<div class="alLogo">
+<img alt="AAC&amp;U" class="alImg" src="/assets/AACU_logo.png"/>
+<span class="alFallback"> AAC&amp;U </span>
+</div>
+<div class="alLogo">
+<img alt="Cambridge" class="alImg" src="/assets/Cambridge_logo.png"/>
+<span class="alFallback"> Cambridge </span>
+</div>
+<div class="alLogo">
+<img alt="IB" class="alImg" src="/assets/IB_logo.png"/>
+<span class="alFallback"> IB </span>
+</div>
+<div class="alLogo">
+<img alt="LSAT" class="alImg" src="/assets/LSAT_logo.png"/>
+<span class="alFallback"> LSAT </span>
+</div>
+<div class="alLogo">
+<img alt="GMAT" class="alImg" src="/assets/GMAT_logo.png"/>
+<span class="alFallback"> GMAT </span>
+</div>
+</div>
+<div class="alignmentNote">
+            NeuPrint’s cognitive frameworks and rubrics are structurally aligned with
+            <span class="em"> internationally recognized assessment and competency systems </span>
+            .
+            <br/>
+            These include
+            <span class="em"> OECD PISA </span>
+            ,
+            <span class="em"> ETS measurement models </span>
+            ,
+            <span class="em"> AERA and NCME evaluation standards </span>
+            , and
+            <span class="em"> AAC&amp;U VALUE rubrics </span>
+            .
+            <br/>
+            They also reflect shared reasoning constructs found in
+            <span class="em"> Cambridge International </span>
+            , the
+            <span class="em"> International Baccalaureate (IB) </span>
+            , and reasoning assessments such as the
+            <span class="em"> LSAT and GMAT </span>
+            .
+          </div>
+</div>
+</div>
+<div class="footer">
+<div>Copyright © 2026 Neuprint. All rights reserved.</div>
+<div>U.S. entity in formation.</div>
+</div>
+</div>
+
+<textarea aria-hidden="true" id="dev-report-json" style="display:none">
+      {
+        "engine_version": "1.1",
+        "assessment_id": "NP-2025-0314-0007",
+        "input_language": "EN",
+        "generated_at_utc": "2025-03-14T10:22:11Z",
+        "_schema": {
+          "meta": "Branding, verification, and header metadata used across the page.",
+          "hero": "Top summary area chips and hero quote. Values populate the header and KPI chips.",
+          "rsl": "Reasoning Structure Layer. percentile_0to1 (0-1) used to compute Top (100 - pct*100)%.",
+          "cff": "Cognitive Fingerprint Framework. observed_patterns.primary/secondary show the two patterns.",
+          "agency": "Reasoning Control / Structural Agency section and charts.",
+          "role_fit": "Role Fit section including track scores and inference flow labels."
+        },
+        "meta": {
+          "product_name": "NeuPrint",
+          "engine_label": "NeuPrint Cognitive Forensics Engine v1.1",
+          "signed_note": "This determination is structurally signed and referenceable.",
+          "verify_url": "https://neuprint.ai/verify",
+          "verification_anchor_note": "QR code shown represents the verification anchor.",
+          "verification_id": "NP-2025-0314-0007",
+          "qr_alt": "QR placeholder"
+        },
+        "hero": {
+          "title": "Structural Reference for Human Reasoning",
+          "description": "NeuPrint provides a decision-grade structural reference that determines whether reasoning control remained with the human under AI-assisted conditions.",
+          "chips": {
+            "rsl_level": "L4 Integrated",
+            "determination": "Reasoning Simulator",
+            "fri": 3.72,
+            "control": "Human",
+            "role_fit": "Strategy·Analysis·Policy",
+            "confidence_index": 0.88
+          },
+          "decision_compression_quote": "Demonstrates exploratory reasoning that converts observation into cross-domain conceptual inquiry, but prioritizes ideational expansion over evaluative convergence, indicating the need to reinforce counterfactual testing and disciplined conclusion consolidation."
+        },
+        "rsl": {
+          "section_title": "1. Reasoning Structure Layer (RSL)",
+          "section_lead": "This section shows how your thinking was organized in this writing, and what you can improve next.",
+          "overall_level": "L4",
+          "overall_label": "Integrated",
+          "overall_level_display": "L4 Integrated",
+          "overall_level_note": "Multiple reasoning dimensions coordinated into a stable, non-dominant structure.",
+          "fri_label": "Final Reasoning Index",
+          "fri": 3.72,
+          "fri_note": "Your reasoning structure is stable in most situations. Connections and evaluations usually remain consistent.",
+          "percentile_0to1": 0.76,
+          "cohort_placement_display": "Top 24%",
+          "cohort_note": "This position reflects consistently structured reasoning relative to comparable peers.",
+          "stability_index": 0.89,
+          "stability_note": "Your reasoning structure remains stable even with minor wording changes.",
+          "summary": {
+            "title": "RSL Summary",
+            "one_line": "Connects writers, history, and ideas over time but stops short of fully tracing one line to its end.",
+            "paragraph": "Thinking moves by linking personal reflection with historical patterns and named examples. Attention shifts across time, returning to earlier ideas with added nuance. Values shape how claims are framed and occasionally redirect the line of thought. Some paths pause after comparison rather than being fully followed through."
+          },
+          "charts": {
+            "cohort_positioning": {
+              "title": "Cohort Positioning",
+              "help": "Horizontal axis shows FRI (0 to 5). Vertical axis shows the share of the cohort (0 to 100%) at each score band. The yellow marker shows the current position, and the outer ring indicates the positioning moment.",
+              "curve_points": [
+                {
+                  "x": 0.0,
+                  "y": 2
+                },
+                {
+                  "x": 0.5,
+                  "y": 6
+                },
+                {
+                  "x": 1.0,
+                  "y": 14
+                },
+                {
+                  "x": 1.5,
+                  "y": 26
+                },
+                {
+                  "x": 2.0,
+                  "y": 30
+                },
+                {
+                  "x": 2.5,
+                  "y": 45
+                },
+                {
+                  "x": 3.0,
+                  "y": 58
+                },
+                {
+                  "x": 3.5,
+                  "y": 42
+                },
+                {
+                  "x": 4.0,
+                  "y": 22
+                },
+                {
+                  "x": 4.5,
+                  "y": 10
+                },
+                {
+                  "x": 5.0,
+                  "y": 4
+                }
+              ]
+            },
+            "rsl_radar": {
+              "title": "RSL Radar",
+              "help": "This chart shows balance. A rounder shape means your skills work together. Sharp dips mean one or two skills need attention."
+            }
+          },
+          "dimensions": [
+            {
+              "code": "R1.",
+              "name": "Interpretation",
+              "score": 4,
+              "observation": "Interprets the guiding questions by unpacking what the inquiry seeks to examine and why it matters. As a result, the response follows how each question invites reflection on meaning, history, and change rather than surface definition. However one further step could trace how a single constraint narrows that purpose at a specific moment. For example, the meaning of American shifts when political conflict intensifies rather than remaining constant across periods."
+            },
+            {
+              "code": "R2.",
+              "name": "Issue Decomposition",
+              "score": 4,
+              "observation": "Breaks the discussion into linked issues such as history, identity, politics, and literary form. As a result, the reasoning moves by showing how one element leads to or reacts against another across time. One next step could follow one issue through a single cause-and-effect chain without branching. For example, shifts in political climate lead to renewed interest in essays that foreground individual voice."
+            },
+            {
+              "code": "R3.",
+              "name": "Evidence Quality",
+              "score": 3,
+              "observation": "Uses named writers, historical periods, and well-known works as supporting material. As a result, claims are grounded in recognizable examples rather than unsupported assertion. One next step could pause to compare how two sources differ in reliability or reach. For example, a founding-era pamphlet and a contemporary essay serve different audiences and purposes."
+            },
+            {
+              "code": "R4.",
+              "name": "Reasoning &amp; Counterfactuals",
+              "score": 4,
+              "observation": "Explores how ideas might appear differently under alternate historical or political conditions. As a result, the reasoning considers what follows if certain fears, values, or trends dominate at a given time. One next step could hold two possible outcomes side by side before moving on. For example, expanding democratic ideals can coexist with persistent inequality depending on which forces prevail."
+            },
+            {
+              "code": "R5.",
+              "name": "Coherence &amp; Clarity",
+              "score": 4,
+              "observation": "Moves smoothly from personal experience to historical survey and then to present-day observation. As a result, ideas connect through clear transitions that keep the line of thought easy to follow. One next step could linger briefly at a transition point before shifting topics. For example, a pause between early religious writing and Enlightenment argument highlights the change in tone."
+            },
+            {
+              "code": "R6.",
+              "name": "Metacognition &amp; Self-repair",
+              "score": 4,
+              "observation": "Revisits earlier judgments and revises them after new exposure and reflection. As a result, the thinking shows awareness of limits in prior views and adjustment over time. One next step could name a specific trigger that prompted the shift more precisely. For example, encountering authoritarian rule abroad altered assumptions about domestic political risk."
+            },
+            {
+              "code": "R7.",
+              "name": "Ethical / Societal Framing",
+              "score": 4,
+              "observation": "Frames ideas through values such as democracy, freedom, and fairness while acknowledging tension among them. As a result, conclusions shift depending on which value is emphasized at a given moment. One next step could set a clear boundary where one value outweighs another. For example, democratic aspiration loses force when systemic exclusion remains unaddressed."
+            },
+            {
+              "code": "R8.",
+              "name": "Perspective Flexibility",
+              "score": 4,
+              "observation": "Moves between personal, historical, literary, and political viewpoints to reconsider claims. As a result, conclusions change as the vantage point changes across eras and roles. One next step could explicitly contrast two viewpoints before settling on one. For example, a colonial religious outlook contrasts sharply with a secular Enlightenment stance."
+            }
+          ],
+          "alignment_disclosure": "RSL (R1–R8) is aligned with internationally validated reasoning constructs used across OECD/PISA assessments, ETS evidence-centered evaluation frameworks, APA-endorsed critical thinking models, and UNESCO-referenced global competence and citizenship frameworks."
+        },
+        "cff": {
+          "section_title": "2. Cognitive Fingerprint Framework (CFF)",
+          "section_lead": "Describes structural characteristics of reasoning formation and revision behavior observed in the task, based on the CFF indicator set.",
+          "final_determination": {
+            "label": "Ax-4. Reasoning Simulator",
+            "type_confidence": 0.81,
+            "lead": "Final label is Ax-4. Reasoning Simulator with Type Confidence 0.81 .",
+            "explanation": "Ax-4. Reasoning Simulator reflects a reasoning structure that appears coherent and well-formed, while transitions and revisions are driven by simulated control patterns rather than direct intent formation."
+          },
+          "observed_patterns": {
+            "lead": "Primary pattern is Reflective Explorer and secondary pattern is Evidence Weaver , with Type Confidence 0.83 .",
+            "primary": "Reflective Explorer",
+            "secondary": "Evidence Weaver",
+            "type_confidence": 0.83,
+            "explanation": "Reflective Explorer shows active self-revision and exploratory restructuring during reasoning. Thought progresses through reflection, reassessment, and adaptive refinement. And Evidence Weaver emphasizes linking claims with supporting material. Reasoning strength lies in evidence connectivity rather than abstract inference."
+          },
+          "signature_fingerprint": {
+            "title": "Cognitive Fingerprint",
+            "subtitle": "Reasoning Structure Visualization",
+            "description": "The Cognitive Fingerprint is a structural identification layer for reasoning. While topics may change, the way a person constructs claims, moves between ideas, and revises conclusions follows a consistent pattern. NeuPrint visualizes this repeatable structure to enable comparison across prompts, domains, and time."
+          },
+          "radar": {
+            "title": "CFF Radar",
+            "help": "The CFF Radar shows the relative distribution of structural reasoning indicators. The shape reflects contribution patterns rather than performance or optimality."
+          },
+          "indicator_summary": {
+            "rows": [
+              {
+                "code": "AAS",
+                "indicator": "Argument Architecture Style",
+                "score": 0.63,
+                "status": "Active"
+              },
+              {
+                "code": "CTF",
+                "indicator": "Cognitive Transition Flow",
+                "score": 0.71,
+                "status": "Active"
+              },
+              {
+                "code": "RMD",
+                "indicator": "Reasoning Momentum Delta",
+                "score": 0.58,
+                "status": "Active"
+              },
+              {
+                "code": "RDX",
+                "indicator": "Revision Depth Index",
+                "score": 0.74,
+                "status": "Active"
+              },
+              {
+                "code": "EDS",
+                "indicator": "Evidence Diversity Score",
+                "score": 0.62,
+                "status": "Active"
+              },
+              {
+                "code": "IFD",
+                "indicator": "Intent Friction Delta",
+                "score": 0.33,
+                "status": "Active"
+              },
+              {
+                "code": "KPF-Sim",
+                "indicator": "Keystroke Pattern Fingerprint Similarity",
+                "score": null,
+                "status": "Excluded"
+              },
+              {
+                "code": "TPS-H",
+                "indicator": "Thought Pattern Similarity (History-based)",
+                "score": null,
+                "status": "Excluded"
+              }
+            ],
+            "closing": "The Cognitive Fingerprint Framework describes how reasoning is structurally formed, revised, and controlled, providing a stable reference for understanding thinking patterns beyond surface content or outcomes."
+          },
+          "indicators": {
+            "AAS": 0.63,
+            "CTF": 0.71,
+            "RMD": 0.58,
+            "RDX": 0.74,
+            "EDS": 0.62,
+            "IFD": 0.33,
+            "KPF-Sim": null,
+            "TPS-H": null
+          }
+        },
+        "agency": {
+          "section_title": "3. Reasoning Control (Structural Agency)",
+          "section_lead": "Evaluates individual control over reasoning decisions versus automated continuation, as defined by structural agency at decision boundaries in NeuPrint.",
+          "summary": {
+            "title": "Reasoning Control Summary",
+            "headline": "Human-led reasoning with stable structural traces. Current point is near the human cluster center.",
+            "control_pattern": "deep_reflective_human",
+            "reliability_band": "HIGH",
+            "decision_statement": "Reasoning decisions originate from human-driven structural revision rather than automated continuation flow."
+          },
+          "observed_structural_signals": {
+            "title": "Observed Structural Signals",
+            "bullets": [
+              "Revision activity occurs at semantic decision boundaries.",
+              "Argument order adjustments correspond to logical correction.",
+              "Consistency checks appear across structural transitions.",
+              "No sustained automated propagation is detected at reasoning boundaries."
+            ],
+            "note": "These signals reflect document-specific structural behavior and are independent of surface-level writing style."
+          },
+          "distribution": {
+            "title": "Reasoning Control Distribution",
+            "help": "The distribution shows the proportion of ownership of reasoning decisions across structural decision points. Values reflect where control was exercised during reasoning transitions, not authorship attribution, model usage, or stylistic origin. A high human proportion indicates that primary reasoning control remained with the individual throughout the task.",
+            "human_pct": 82,
+            "hybrid_pct": 9,
+            "ai_pct": 9
+          },
+          "signals": {
+            "title": "Structural Control Signals (Agency Indicators)",
+            "help": "Signal values represent relative contribution to the overall reasoning control determination, normalized on a 0 to 1 scale.",
+            "items": [
+              {
+                "label": "Structural variance",
+                "note": "non-linear restructuring across reasoning boundaries."
+              },
+              {
+                "label": "Human rhythm index",
+                "note": "irregular pacing consistent with reflective decision cycles."
+              },
+              {
+                "label": "Transition flow",
+                "note": "intentional movement between reasoning states."
+              },
+              {
+                "label": "Revision depth",
+                "note": "degree of conceptual modification at semantic boundaries."
+              }
+            ],
+            "conclusion": "The combined signal profile supports classification as human-controlled reasoning.",
+            "contributions": {
+              "structural_variance": 0.22,
+              "human_rhythm_index": 0.18,
+              "transition_flow": 0.15,
+              "revision_depth": 0.12
+            }
+          },
+          "signal_contributions": {
+            "structural_variance": 0.22,
+            "human_rhythm_index": 0.18,
+            "transition_flow": 0.15,
+            "revision_depth": 0.12
+          }
+        },
+        "role_fit": {
+          "section_title": "4. Role Fit Signals",
+          "section_lead": "Explores alignment between observed reasoning patterns and role-specific cognitive demands.",
+          "cognitive_style_summary": "Reflective Explorer, structured but exploratory. Recommended roles include: Analyst, Research, Strategy.",
+          "track_scores": [
+            {
+              "track": "Strategy·Analysis·Policy",
+              "pct": 78
+            },
+            {
+              "track": "Data·AI·Intelligence",
+              "pct": 74
+            }
+          ],
+          "profile_statement": "This profile indicates consistent evidence of structured reasoning, hypothesis exploration, and deliberate evaluation patterns, which align with roles requiring analytical depth, research-driven inquiry, and strategic framing.",
+          "job_role_fit": [
+            {
+              "track": "Strategy·Analysis·Policy",
+              "roles": [
+                "Strategy Analyst",
+                "Management Analyst",
+                "Policy Analyst",
+                "Economic Researcher",
+                "Financial Analyst",
+                "Risk Analyst",
+                "Compliance Officer",
+                "Internal Auditor"
+              ]
+            },
+            {
+              "track": "Data·AI·Intelligence",
+              "roles": [
+                "Data Analyst",
+                "Data Scientist",
+                "Business Intelligence Analyst",
+                "Machine Learning Analyst",
+                "Statistician",
+                "Operations Research Analyst",
+                "Information Security Analyst"
+              ]
+            }
+          ],
+          "inference_flow": {
+            "title": "Role Fit Inference Flow",
+            "items": [
+              {
+                "title": "Cognitive Operating Characteristics",
+                "tags": "thought control · reasoning mode"
+              },
+              {
+                "title": "Reasoning Structure Patterns",
+                "tags": "decomposition · linkage · validation · regulation"
+              },
+              {
+                "title": "NeuPrint Primary Metrics",
+                "tags": "CFF Prime 8 · RSL R1–R8"
+              },
+              {
+                "title": "NeuPrint Secondary Interpretations",
+                "tags": "Reasoning Level · Stability · Drift"
+              },
+              {
+                "title": "Competency Fulfillment Assessment",
+                "tags": "OECD aligned · O*NET aligned · reference"
+              },
+              {
+                "title": "Job Role Fit",
+                "tags": "final alignment signal · decision support"
+              }
+            ],
+            "closing": "NeuPrint measures reasoning structures, derives interpretable cognitive profiles, and aligns them with internationally recognized competency frameworks (OECD and O*NET) to inform job role fit."
+          }
+        },
+        "footer": {
+          "logos": [
+            "OECD",
+            "PISA",
+            "ETS",
+            "APA",
+            "O*NET",
+            "AERA",
+            "NCME",
+            "AAC&amp;U",
+            "Cambridge",
+            "IB",
+            "LSAT",
+            "GMAT"
+          ],
+          "alignment_paragraphs": [
+            "NeuPrint’s cognitive frameworks and rubrics are structurally aligned with internationally recognized assessment and competency systems .",
+            "These include OECD PISA , ETS measurement models , AERA and NCME evaluation standards , and AAC&amp;U VALUE rubrics .",
+            "They also reflect shared reasoning constructs found in Cambridge International , the International Baccalaureate (IB) , and reasoning assessments such as the LSAT and GMAT ."
+          ],
+          "copyright": "Copyright © 2026 Neuprint. All rights reserved.",
+          "entity_note": "U.S. entity in formation."
+        },
+        "ai": {
+          "mix_ratio": {
+            "human": 0.82,
+            "hybrid": 0.09,
+            "ai": 0.09
+          },
+          "signal_contributions": {
+            "structural_variance": 0.22,
+            "human_rhythm_index": 0.18,
+            "transition_flow": 0.15,
+            "revision_depth": 0.12
+          },
+          "interpretation": "Human-led reasoning with stable structural traces. Current point is near the human cluster center.",
+          "pattern_label": "deep_reflective_human",
+          "detection_reliability_band": "HIGH"
+        }
+      }
+    </textarea>
+
+
+
+
+
+
+
+
+  <script src="/lib/client/report/charts/chartCore.js"></script>
+<script src="/lib/client/report/charts/plugins.js"></script>
+<script src="/lib/client/report/charts/cffRadar.js"></script>
+<script src="/lib/client/report/charts/rslCohort.js"></script>
+<script src="/lib/client/report/charts/rslRadar.js"></script>
+<script src="/lib/client/report/charts/agency.js"></script>
+<script src="/lib/client/report/hydrate.js"></script>
+</body>
+</html>
